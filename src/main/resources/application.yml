@@ -1,0 +1,9 @@
+spring:
+  couchbase:
+    bootstrap-hosts: localhost
+    bucket:
+      name: Employee
+      password: pulsesg
+  data:
+    couchbase:
+      auto-index: true
