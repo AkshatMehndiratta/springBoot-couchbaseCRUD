@@ -1,5 +1,6 @@
 package com.example.couchbaseCRUD.CouchbaseCRUD.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepositories;
@@ -8,9 +9,18 @@ import org.springframework.data.couchbase.repository.config.EnableCouchbaseRepos
 @EnableCouchbaseRepositories(basePackages = {"com.example.couchbaseCRUD.CouchbaseCRUD"})
 public class EmployeeConfig extends AbstractCouchbaseConfiguration {
 
+    @Value("${spring.couchbase.bootstrap-hosts}")
+    private String bootStrapHosts;
+
+    @Value("${spring.couchbase.bucket.name}")
+    private String bucketName;
+
+    @Value("${spring.couchbase.bucket.password}")
+    private String bucketPassword;
+
     @Override
     public String getConnectionString() {
-        return "localhost";
+        return bootStrapHosts;
     }
 
     @Override
@@ -20,11 +30,11 @@ public class EmployeeConfig extends AbstractCouchbaseConfiguration {
 
     @Override
     public String getPassword() {
-        return "pulsesg";
+        return bucketPassword;
     }
 
     @Override
     public String getBucketName() {
-        return "Employee";
+        return bucketName;
     }
 }
